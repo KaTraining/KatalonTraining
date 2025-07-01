@@ -65,8 +65,21 @@ public class validateExcelDate {
 	}
 	
 	@Keyword
-	def oceanCount() {
+	def oceanCount(def response) {
 		def data = findTestData("ContinentsData")
-		
-	}
+		for(def row =1;row<=data.getRowNumbers();row++) {
+			def excelOceanCount = data.getValue("oceans", row).split(',').collect { it.trim() }
+			println excelOceanCount.size()
+			def responseVal = response.oceans[row-1]
+			def responseOceanCount = (response.size() == 1 && response.contains(','))?responseVal.split(',').collect { it.trim() }:responseVal
+			println response.oceans[row-1]
+			if (excelOceanCount.size() == responseOceanCount.size())
+				println "${response.name[row-1]} has ${data.getValue("oceans", row)}"
+			else
+				{
+					println "${response.name[row-1]} has mismatch"
+					
+				}
+		}
+	}	
 }

@@ -25,15 +25,14 @@ public class validateExcelDate {
 	def excelData(def responseJSON,def conName) {
 		def found = false
 		for (continent in responseJSON) {
-			if (continent.name == conName )
-				{
-					println "continent found"
-					found = true
-				}
+			if (continent.name == conName ) {
+				println "continent found"
+				found = true
+			}
 		}
 		if (!found) {
 			println "${conName} not present"
-			}
+		}
 	}
 
 	@Keyword
@@ -54,16 +53,14 @@ public class validateExcelDate {
 		def data = findTestData("ContinentsData")
 		def found = false
 		for(def row=1;row<=data.getRowNumbers();row++) {
-			if(data.getValue("name", row) == conName)
-				{
-					println data.getValue("oceans", row)
-					found = true
-				}
+			if(data.getValue("name", row) == conName) {
+				println data.getValue("oceans", row)
+				found = true
+			}
 		}
-		
+
 		if (!found) {
 			println "${conName} not present"
-			}
-	
 		}
+	}
 }

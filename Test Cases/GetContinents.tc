@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>GetContinents</name>
+   <tag></tag>
+   <comment></comment>
+   <recordOption>OTHER</recordOption>
+   <testCaseGuid>eed5c952-6914-4753-82ce-2ce89a081fb3</testCaseGuid>
+   <testDataLinks>
+      <combinationType>ONE</combinationType>
+      <id>34c7685d-4d8f-4cb5-82e4-a3c543ea6474</id>
+      <iterationEntity>
+         <iterationType>ALL</iterationType>
+         <value></value>
+      </iterationEntity>
+      <testDataId>Data Files/ContinentsData</testDataId>
+   </testDataLinks>
+   <variableLinks>
+      <testDataLinkId>34c7685d-4d8f-4cb5-82e4-a3c543ea6474</testDataLinkId>
+      <type>DATA_COLUMN</type>
+      <value>name</value>
+      <variableId>c394f3d3-2e64-4462-aecb-e9074eb22d74</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId>34c7685d-4d8f-4cb5-82e4-a3c543ea6474</testDataLinkId>
+      <type>DATA_COLUMN</type>
+      <value>oceans</value>
+      <variableId>cf98fa5b-2c16-44f5-a021-195bbf1c7105</variableId>
+   </variableLinks>
+   <variableLinks>
+      <testDataLinkId>34c7685d-4d8f-4cb5-82e4-a3c543ea6474</testDataLinkId>
+      <type>DATA_COLUMN</type>
+      <value>developedCountries</value>
+      <variableId>487b3ff7-9c57-4366-ba8c-d3e61cf2b9e5</variableId>
+   </variableLinks>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>c394f3d3-2e64-4462-aecb-e9074eb22d74</id>
+      <masked>false</masked>
+      <name>conName</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>cf98fa5b-2c16-44f5-a021-195bbf1c7105</id>
+      <masked>false</masked>
+      <name>oceans</name>
+   </variable>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>487b3ff7-9c57-4366-ba8c-d3e61cf2b9e5</id>
+      <masked>false</masked>
+      <name>devCountries</name>
+   </variable>
+</TestCaseEntity>

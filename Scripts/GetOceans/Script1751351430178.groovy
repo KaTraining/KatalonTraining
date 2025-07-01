@@ -29,6 +29,8 @@ CustomKeywords.'continentCustom.validateExcelDate.findOceans'('Ankola')
 //checking specific continent available in response
 CustomKeywords.'continentCustom.validateExcelDate.excelData'(responseJSON, findTestData("ContinentsData").getValue("name", 1))
 
+//fetching data from excel based on column name and rowindex
+//checking specific continent available in response
 
 CustomKeywords.'continentCustom.validateExcelDate.verifyStatusCode'(response)
 

@@ -19,7 +19,7 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import static org.assertj.core.api.Assertions.*
 import internal.GlobalVariable
 
-public class validateExcelDate {
+public class validateExcelData {
 
 	@Keyword
 	def excelData(def responseJSON,def conName) {
@@ -63,23 +63,49 @@ public class validateExcelDate {
 			println "${conName} not present"
 		}
 	}
-	
+
+
 	@Keyword
 	def oceanCount(def response) {
 		def data = findTestData("ContinentsData")
 		for(def row =1;row<=data.getRowNumbers();row++) {
-			def excelOceanCount = data.getValue("oceans", row).split(',').collect { it.trim() }
-			println excelOceanCount.size()
+			def excelOceanCount = (data.getValue("oceans", row)).contains(',')?data.getValue("oceans", row).split(',').collect { it.trim() }:data.getValue("oceans", row).collect { it.trim() }
 			def responseVal = response.oceans[row-1]
 			def responseOceanCount = (response.size() == 1 && response.contains(','))?responseVal.split(',').collect { it.trim() }:responseVal
+			println "Oceans in response for continent ${response.name[row-1]}"
 			println response.oceans[row-1]
 			if (excelOceanCount.size() == responseOceanCount.size())
 				println "${response.name[row-1]} has ${data.getValue("oceans", row)}"
-			else
-				{
-					println "${response.name[row-1]} has mismatch"
-					
-				}
+			else {
+				println "${response.name[row-1]} has mismatch"
+			}
 		}
-	}	
+	}
+
+	//finding continents that have area greater than continent
+	@Keyword
+	def areaComparison(def responseJson) {
+		for(def row=1;row<=findTestData("ContinentsData").getRowNumbers();row++) {
+			for(response in responseJson) {
+				if((findTestData("ContinentsData").getValue("areaSqKm",row)).toInteger() > (response.areaSqKm))
+					print response.name + " "
+			}
+			println ""
+		}
+	}
+
+	//finding continents that share oceans
+	@Keyword
+	def findOceanContinent(def responseJson) {
+		for(def continent in responseJson) {
+			def oceanVal = continent.oceans[0]
+			def ocean = (oceanVal.contains(','))?oceanVal.split(',')[0]:oceanVal
+			println "Continents sharing '${ocean}' with ${continent.name}:"
+			for(def row=1;row<=findTestData("ContinentsData").getRowNumbers();row++) {
+				if( (findTestData("ContinentsData").getValue("oceans", row)).contains(ocean) && findTestData("ContinentsData").getValue("name", row) != continent.name){
+					println findTestData("ContinentsData").getValue("name", row)
+				}
+			}
+		}
+	}
 }

@@ -39,7 +39,7 @@ public class customContinentValidation {
 			}
 		}
 	}
-	//validating testdata with response response
+	//validating countries in  with response response
 	def findNonDevelopedCountries(def responseJson) {
 		def countriesData = findTestData('DevelopedCountries')
 		for(def row =1;row<=countriesData.getRowNumbers();row++) {

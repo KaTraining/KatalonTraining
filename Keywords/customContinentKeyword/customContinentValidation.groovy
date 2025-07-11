@@ -30,8 +30,7 @@ public class customContinentValidation {
 	//fetching developed countries from response
 	@Keyword
 	def findDevelopedCountries(def responseJson) {
-		for (continent in responseJson.data.continent)
-		{
+		for (continent in responseJson.data.continent) {
 			println "Developed countries in ${continent.name}"
 			for(countries in continent.countries) {
 				if(countries.developed == true)
@@ -40,16 +39,38 @@ public class customContinentValidation {
 		}
 	}
 	//validating countries in  with response response
+	@Keyword
 	def findNonDevelopedCountries(def responseJson) {
 		def countriesData = findTestData('DevelopedCountries')
-		for(def row =1;row<=countriesData.getRowNumbers();row++) {
+		(1..countriesData.getRowNumbers()).each{ row ->
 			for(countryResp in responseJson.data.continent.countries) {
-				for(dev in countryResp.developed)
-					{
-						if(dev == false && countriesData.getValue('Developed', row) == 'false' && !(countryResp.name.contains(countriesData.getValue('Country', row))))
-							println "${countriesData.getValue('Country', row)} from ${countriesData.getValue('Continent', row)} is not present in response" 
-					}
+				(countryResp.developed).each{dev ->
+
+					if(dev == false && countriesData.getValue('Developed', row) == 'false' && !(countryResp.name.contains(countriesData.getValue('Country', row))))
+						println "${countriesData.getValue('Country', row)} from ${countriesData.getValue('Continent', row)} is not present in response"
+				}
 			}
 		}
+		println "----------Results after each---------------"
+		for(def row =1;row<=countriesData.getRowNumbers();row++) {
+			for(countryResp in responseJson.data.continent.countries) {
+				for(dev in countryResp.developed) {
+					if(dev == false && countriesData.getValue('Developed', row) == 'false' && !(countryResp.name.contains(countriesData.getValue('Country', row))))
+						println "${countriesData.getValue('Country', row)} from ${countriesData.getValue('Continent', row)} is not present in response"
+				}
+			}
+		}
+	}
+	@Keyword
+	def findLanguageCountires(def responseJson) {
+		(responseJson.data.continent).each { continent ->
+			(continent.countries).each { country ->
+				for(language in country.languages) {
+					if(language == "English")
+						println country.name
+					}
+				}
+		}
+		
 	}
 }
